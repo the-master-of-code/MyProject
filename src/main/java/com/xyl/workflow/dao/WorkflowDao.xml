@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyl.workflow.dao.WorkflowDao">
+
+    <resultMap id="BaseResultMap" type="com.xyl.workflow.entity.Workflow">
+        <!--@Table workflow-->
+        <result property="seqno" column="seqno" jdbcType="VARCHAR"/>
+        <result property="operationSeqno" column="operation_seqno" jdbcType="VARCHAR"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="reviewer" column="reviewer" jdbcType="VARCHAR"/>
+        <result property="endflag" column="endflag" jdbcType="VARCHAR"/>
+        <result property="effectflag" column="effectflag" jdbcType="VARCHAR"/>
+        <result property="nextOperator" column="next_operator" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="preAction" column="pre_action" jdbcType="VARCHAR"/>
+        <result property="preCode" column="pre_code" jdbcType="VARCHAR"/>
+        <result property="spare1" column="spare1" jdbcType="VARCHAR"/>
+        <result property="spare2" column="spare2" jdbcType="VARCHAR"/>
+        <result property="spare3" column="spare3" jdbcType="VARCHAR"/>
+        <result property="spare4" column="spare4" jdbcType="VARCHAR"/>
+        <result property="spare5" column="spare5" jdbcType="VARCHAR"/>
+        <result property="spare6" column="spare6" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          seqno, operation_seqno, create_user, create_date, reviewer, endflag, effectflag, next_operator, status, pre_action, pre_code, spare1, spare2, spare3, spare4, spare5, spare6
+        from project1.workflow
+        where seqno = #{seqno}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          seqno, operation_seqno, create_user, create_date, reviewer, endflag, effectflag, next_operator, status, pre_action, pre_code, spare1, spare2, spare3, spare4, spare5, spare6
+        from project1.workflow
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          seqno, operation_seqno, create_user, create_date, reviewer, endflag, effectflag, next_operator, status, pre_action, pre_code, spare1, spare2, spare3, spare4, spare5, spare6
+        from project1.workflow
+        <where>
+            <if test="seqno != null and seqno != ''">
+                and seqno = #{seqno}
+            </if>
+            <if test="operationSeqno != null and operationSeqno != ''">
+                and operation_seqno = #{operationSeqno}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="reviewer != null and reviewer != ''">
+                and reviewer = #{reviewer}
+            </if>
+            <if test="endflag != null and endflag != ''">
+                and endflag = #{endflag}
+            </if>
+            <if test="effectflag != null and effectflag != ''">
+                and effectflag = #{effectflag}
+            </if>
+            <if test="nextOperator != null and nextOperator != ''">
+                and next_operator = #{nextOperator}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="preAction != null and preAction != ''">
+                and pre_action = #{preAction}
+            </if>
+            <if test="preCode != null and preCode != ''">
+                and pre_code = #{preCode}
+            </if>
+            <if test="spare1 != null and spare1 != ''">
+                and spare1 = #{spare1}
+            </if>
+            <if test="spare2 != null and spare2 != ''">
+                and spare2 = #{spare2}
+            </if>
+            <if test="spare3 != null and spare3 != ''">
+                and spare3 = #{spare3}
+            </if>
+            <if test="spare4 != null and spare4 != ''">
+                and spare4 = #{spare4}
+            </if>
+            <if test="spare5 != null and spare5 != ''">
+                and spare5 = #{spare5}
+            </if>
+            <if test="spare6 != null and spare6 != ''">
+                and spare6 = #{spare6}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="seqno" useGeneratedKeys="true">
+        insert into project1.workflow(operation_seqno, create_user, create_date, reviewer, endflag, effectflag, next_operator, status, pre_action, pre_code, spare1, spare2, spare3, spare4, spare5, spare6)
+        values (#{operationSeqno}, #{createUser}, #{createDate}, #{reviewer}, #{endflag}, #{effectflag}, #{nextOperator}, #{status}, #{preAction}, #{preCode}, #{spare1}, #{spare2}, #{spare3}, #{spare4}, #{spare5}, #{spare6})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project1.workflow
+        <set>
+            <if test="operationSeqno != null and operationSeqno != ''">
+                operation_seqno = #{operationSeqno},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="reviewer != null and reviewer != ''">
+                reviewer = #{reviewer},
+            </if>
+            <if test="endflag != null and endflag != ''">
+                endflag = #{endflag},
+            </if>
+            <if test="effectflag != null and effectflag != ''">
+                effectflag = #{effectflag},
+            </if>
+            <if test="nextOperator != null and nextOperator != ''">
+                next_operator = #{nextOperator},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="preAction != null and preAction != ''">
+                pre_action = #{preAction},
+            </if>
+            <if test="preCode != null and preCode != ''">
+                pre_code = #{preCode},
+            </if>
+            <if test="spare1 != null and spare1 != ''">
+                spare1 = #{spare1},
+            </if>
+            <if test="spare2 != null and spare2 != ''">
+                spare2 = #{spare2},
+            </if>
+            <if test="spare3 != null and spare3 != ''">
+                spare3 = #{spare3},
+            </if>
+            <if test="spare4 != null and spare4 != ''">
+                spare4 = #{spare4},
+            </if>
+            <if test="spare5 != null and spare5 != ''">
+                spare5 = #{spare5},
+            </if>
+            <if test="spare6 != null and spare6 != ''">
+                spare6 = #{spare6},
+            </if>
+        </set>
+        where seqno = #{seqno}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from project1.workflow where seqno = #{seqno}
+    </delete>
+
+</mapper>
